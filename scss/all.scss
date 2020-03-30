@@ -1,3 +1,26 @@
+$list-width: 300px;
+$font-size-lg: 30px;
+$font-size-md: 25px;
+$font-size-sm: 20px;
+$base-color: #ffffff;
+$list-bg-color: #e7eeea;
+$list-font-color: #37523d;
+
+@mixin pc {
+  @media (max-width: 960px) {
+    @content;
+  }
+}
+@mixin pad {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+@mixin mobile {
+  @media (max-width: 568px) {
+    @content;
+  }
+}
 body {
   font-family: 微軟正黑體;
   background-color: black;
@@ -5,36 +28,55 @@ body {
 .container {
   width: 948px;
   margin: 0 auto;
-  background-color: #ffffff;
+  background-color: $base-color;
   display: flex;
+  @include mobile {
+    width: 100%;
+    display: block;
+  }
 }
 .list {
   margin: 0 10px;
+  @include mobile {
+    margin-bottom: 10px;
+  }
   h3 {
-    width: 300px;
+    width: $list-width;
     padding: 20px 0;
-    background-color: #37523d;
-    font-size: 30px;
-    color: #ffffff;
+    background-color: $list-font-color;
+    font-size: $font-size-lg;
+    color: $base-color;
     display: flex;
     justify-content: center;
     align-items: center;
+    @include pad {
+      background-color: #4f9d9d;
+    }
+    @include mobile {
+      width: 100%;
+      display: block;
+      text-align: center;
+      background-color: #984b4b;
+    }
   }
   ul li {
-    width: 300px;
+    width: $list-width;
     padding: 20px 0;
     display: flex;
     justify-content: center;
     align-items: center;
-    border: 1px solid #e7eeea;
+    border: 1px solid $list-bg-color;
     &:hover {
-      background-color: #e7eeea;
+      background-color: $list-bg-color;
+    }
+    @include mobile {
+      width: 100%;
     }
   }
   a {
     text-decoration: none;
-    font-size: 25px;
-    color: #37523d;
+    font-size: $font-size-md;
+    color: $list-font-color;
     font-weight: bold;
     display: block;
     width: 100%;
@@ -45,20 +87,33 @@ body {
 .card ul {
   display: flex;
   flex-wrap: wrap;
+  @include pad {
+    display: block;
+  }
   li {
-    width: 300px;
-    border: 1px solid #e7eeea;
+    width: $list-width;
+    border: 1px solid $list-bg-color;
     margin-left: 10px;
     margin-bottom: 10px;
+    @include mobile {
+      width: 100%;
+      img {
+        width: 100%;
+        height: 100%;
+      }
+    }
   }
   h3 {
-    font-size: 20px;
+    font-size: $font-size-sm;
     width: 187px;
     padding: 20px 0;
-    border-right: 1px solid #e7eeea;
+    border-right: 1px solid $list-bg-color;
     display: flex;
     justify-content: center;
     align-items: center;
+    @include mobile {
+      width: 100%;
+    }
   }
 }
 .msg {
@@ -71,10 +126,13 @@ body {
   font-weight: bold;
   p {
     width: 115px;
-    font-size: 20px;
+    font-size: $font-size-sm;
     display: flex;
     justify-content: center;
     align-items: center;
+    @include mobile {
+      width: 100%;
+    }
   }
   a {
     padding: 20px 0;
@@ -82,9 +140,9 @@ body {
     justify-content: center;
     align-items: center;
     text-decoration: none;
-    font-size: 30px;
-    color: #37523d;
+    font-size: $font-size-lg;
+    color: $list-font-color;
     font-weight: bold;
-    background-color: #e7eeea;
+    background-color: $list-bg-color;
   }
 }
