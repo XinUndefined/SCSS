@@ -21,6 +21,16 @@ $list-font-color: #37523d;
     @content;
   }
 }
+
+$grid-num: 12;
+$gutter-width: 30px;
+
+@each $key, $value in $themes {
+  .bg-#{$key} {
+    background-color: $value;
+  }
+}
+
 body {
   font-family: 微軟正黑體;
   background-color: black;
