@@ -1,0 +1,115 @@
+//作業共用樣式
+.content {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.bg-gray {
+  background-color: #ccc;
+}
+.bg-orange {
+  background-color: orange;
+}
+.bg-purple {
+  background-color: Plum;
+}
+.wrap {
+  max-width: 1200px;
+  margin: 0 auto;
+}
+* {
+  box-sizing: border-box;
+}
+
+// 作業由此開始
+// 變數 - start
+$grid-width: 1200px;
+$grid-min-height: 1px;
+$grid-columns-amount: 12;
+$grid-gutter-width: 20px;
+
+@mixin desktop {
+  @media (min-width: 767px) {
+    @content;
+  }
+}
+@mixin clearfix {
+  content: "";
+  display: table;
+  clear: both;
+}
+.clearfix::after {
+  @include clearfix;
+}
+// grid system - start
+.l-container {
+  margin: 0 auto;
+  max-width: $grid-width;
+  padding-left: $grid-gutter-width / 2;
+  padding-right: $grid-gutter-width / 2;
+}
+.l-row {
+  display: flex;
+  flex-wrap: wrap;
+  margin-left: -($grid-gutter-width / 2);
+  margin-right: -($grid-gutter-width / 2);
+}
+%col {
+  position: relative;
+  min-height: $grid-min-height;
+  max-width: 100%;
+  flex: 0 0 100%;
+  padding-left: $grid-gutter-width / 2;
+  padding-right: $grid-gutter-width / 2;
+}
+@for $i from 1 through $grid-columns-amount {
+  .l-col-#{$i} {
+    @extend %col;
+    @include desktop {
+      max-width: percentage($i / $grid-columns-amount);
+      flex: 0 0 percentage($i / $grid-columns-amount);
+    }
+  }
+}
+// flex水平對齊-樣式插件，這樣寫好收納
+.justify-content {
+  &-start {
+    justify-content: flex-start;
+  }
+  &-center {
+    justify-content: center;
+  }
+  &-end {
+    justify-content: flex-end;
+  }
+  &-around {
+    justify-content: space-around;
+  }
+  &-between {
+    justify-content: space-between;
+  }
+}
+// flex垂直對齊-樣式插件，這樣寫好收納
+.align-items {
+  &-start {
+    align-items: flex-start;
+  }
+  &-center {
+    align-items: center;
+  }
+  &-end {
+    align-items: flex-end;
+  }
+}
+// 移除row與col 的 gutter寬度
+.grip-no-gutter {
+  &-row {
+    margin-left: 0;
+    margin-right: 0;
+  }
+  &-col {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
