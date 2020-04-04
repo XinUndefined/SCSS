@@ -1,10 +1,13 @@
-$grid-num: 12;
-$gutter-width: 30px;
-
+.content {
+  height: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
 $themes: (
   "gray": #ccc,
   "orange": orange,
-  "purple": plum
+  "purple": plum,
 );
 
 @each $key, $value in $themes {
@@ -12,16 +15,10 @@ $themes: (
     background-color: $value;
   }
 }
-
+$grid-num: 12;
+$gutter-width: 30px;
 * {
   box-sizing: border-box;
-}
-
-.content {
-  height: 200px;
-  display: flex;
-  justify-content: center;
-  align-items: center;
 }
 
 .wrap {

@@ -1,0 +1,76 @@
+$gutter-width: 20px;
+$grid-num: 12;
+
+* {
+  box-sizing: border-box;
+}
+// gutter可以設置絕對數值
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: gold;
+}
+.container {
+  margin: 0 auto;
+  max-width: 960px;
+  padding-left: $gutter-width/2;
+  padding-right: $gutter-width/2;
+}
+// row的margin的負值會向外頂出去
+// 所以要在最外層再帶入padding左右15px
+
+.box {
+  height: 100px;
+  background-color: red;
+}
+
+.row {
+  display: flex;
+  margin-right: -($gutter-width/2);
+  margin-left: -($gutter-width/2);
+  flex-wrap: wrap;
+}
+// margin-right: -15px;
+// margin-left: -15px;
+// 將左右兩側被padding推擠的地方補回來
+// 手機版的box會被擠出去，使用flex-wrap往下推
+
+// .col-3,
+// .col-4 {
+//   max-width: 100%;
+//   //   在 flex 的運作中，其實可以不需要設置 width 或 max-width，而 max-width 在此算是一個輔助功能，用來限制最大寬度，避免內容寬度超過容器時，導致 flex 格線沒有辦法如預期呈現的問題
+//   flex: 0 0 100%;
+//   //   收縮值設定0 伸展值設定0
+//   padding-left: $gutter-width/2;
+//   padding-right: $gutter-width/2;
+// }
+
+%col {
+  max-width: 100%;
+  flex: 0 0 100%;
+  padding-left: $gutter-width/2;
+  padding-right: $gutter-width/2;
+}
+// %不會被編譯出來，使用extend合併出來
+
+@for $i from 1 through $grid-num {
+  .col-#{$i} {
+    @extend %col;
+  }
+}
+
+@media (min-width: 767px) {
+  @for $i from 1 through $grid-num {
+    .col-#{$i} {
+      max-width: 100% * ($i/$grid-num);
+      flex: 0 0 (100% * ($i/$grid-num));
+    }
+  }
+}
+
+.text {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
